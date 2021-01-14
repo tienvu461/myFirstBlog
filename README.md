@@ -50,3 +50,5 @@ docker-compose exec db psql --username=blogdb --dbname=blogdb
 # Reference
 
 https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
+https://github.com/developerayyo/django-blog/blob/master/blog/templates/blog/post/detail.html
+https://github.com/rileypredum/Your_Blog_Part_2/blob/master/src/templates/read_article.html

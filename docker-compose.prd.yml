@@ -3,25 +3,21 @@ version: "3.9"
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn myFristBlog.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./myFirstBlog/:/usr/src/myFirstBlog/
     ports:
       - "8000:8000"
     env_file:
-      - ./.env.dev
-    # depends_on:
-    #   - db
+      - ./.env.prd
   db:
     image: postgres:12.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRES_DB=blogdb
-      - POSTGRES_USER=blogdb
-      - POSTGRES_PASSWORD=blogdb
+    env_file:
+      - ./.env.prd.db
 
 volumes:
   postgres_data:

@@ -1,4 +1,9 @@
-{% extends "base.html" %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% csrf_token %}
 <style>
     body {
         font-family: "Roboto", sans-serif;
@@ -15,6 +20,7 @@
     }
 </style>
 
+
 <header class="masthead">
     <div class="overlay"></div>
     <div class="container">
@@ -22,32 +28,34 @@
             <div class="col-md-8 col-md-10 mx-auto">
                 <div class="site-heading">
                     <h3 class="site-heading my-4 mt-3 text-white">
-                        Welcome to tienvv's Humble Corner
+                        {{generic_config.welcome_phrase}}
                     </h3>
-                    <p class="text-light">every day love, life, family and technologies, &nbsp</p>
+                    <p class="text-light">{{generic_config.short_description}}</p>
                 </div>
             </div>
         </div>
     </div>
 </header>
+
 <div class="container">
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
-            {% for post in post_list %}
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">{{ post.title }}</h2>
-                    <p class="card-text text-muted h6">
-                        {{ post.author }} | {{ post.created_on}}
-                    </p>
-                    <p class="card-text">{{post.content|slice:":200" }}</p>
-                    <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
-                </div>
-            </div>
+            {% for post in posts %}
+                {% if post.status == True %}
+                    <div class="card shadow bg-white">
+                        <div class="card-body">
+                            <h1 class="card-title"> <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                            <p class="card-text"> {{ post.body_summary|striptags }} </p>
+                            <div> {{ post.author}} | {{ post.created_date }}</div>
+                        </div>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
         {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
     </div>
 </div>
-{%endblock%}
+
+
+{% endblock %}

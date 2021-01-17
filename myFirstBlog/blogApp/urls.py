@@ -4,10 +4,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('', views.blog_posts, name='home'),
+    path('', views.home, name='home'),
     # path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
-    path('blog/<int:pk>/', views.post, name='post_detail'),
-    path('newblog/', views.blog_posts, name='blog'),
+    path('post/<int:pk>/', views.post, name='post_detail'),
     path('markdownx/', include('markdownx.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

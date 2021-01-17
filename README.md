@@ -30,6 +30,19 @@ Python 3.8.5
 ```
 
 6. Start services
+### Create env file at project root directory: ".env.dev"
+```
+DEBUG=1
+SECRET_KEY=...
+DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+SQL_ENGINE=django.db.backends.postgresql
+SQL_DATABASE=...
+SQL_USER=...
+SQL_PASSWORD=...
+SQL_HOST=postgresql
+SQL_PORT=5432
+DATABASE=postgres
+```
 ### Build and start docker 
 ```
 docker-compose up -d --build

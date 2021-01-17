@@ -1,19 +1,24 @@
 from django.contrib import admin
-from .models import Post, BlogPost
+from .models import BlogPost, GenericConfig
 
 from markdownx.admin import MarkdownxModelAdmin
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'status', 'created_on')
-    list_filter = ("status",)
-    search_fields = ['title', 'content']
-    prepopulated_fields = {'slug': ('title',)}
+# class PostAdmin(admin.ModelAdmin):
+#     list_display = ('title', 'slug', 'status', 'created_on')
+#     list_filter = ("status",)
+#     search_fields = ['title', 'content']
+#     prepopulated_fields = {'slug': ('title',)}
 
 
-admin.site.register(Post, PostAdmin)
+# admin.site.register(Post, PostAdmin)
+
+@admin.register(GenericConfig)
+class GenericConfigAdmin(admin.ModelAdmin):
+    list_display = ('config_name', 'blog_name', 'in_use')
 
 @admin.register(BlogPost)
 class BlogPostAdmin(MarkdownxModelAdmin):
-    list_display = ('title', 'created_date', 'mod_date')
-    list_filter = ('created_date', 'mod_date')
+    list_display = ('title',  "status", 'created_date', 'mod_date',)
+    list_filter = ('created_date', 'mod_date', "status",)
     search_fields = ('title',)
+    prepopulated_fields = {'slug': ('title',)}

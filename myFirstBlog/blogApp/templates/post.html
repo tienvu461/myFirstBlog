@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% csrf_token %}
+
+<header class="masthead text-center text-white d-flex" id="mastheadPost" style="background-image: url(/media/{{ post_detail.background_image }})">
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h1 style="font-family: 'Fira Code', Impact, sans-serif">
+                    {{ post_detail.title }}
+                </h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="blog">
+    <p class="card-text" id="post"> {{ post_detail.formatted_markdown|safe }} </p>
+    <div class="text-muted text-right" style="margin-top: 4rem"> {{ post_detail.created_date }}</div>
+</div>
+
+{% endblock %}

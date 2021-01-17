@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  web:
+  blog:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -12,10 +12,10 @@ services:
       - ./.env.dev
     # depends_on:
     #   - db
-  db:
+  postgresql:
     image: postgres:12.0-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgresql_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
@@ -24,4 +24,9 @@ services:
       - POSTGRES_PASSWORD=blogdb
 
 volumes:
-  postgres_data:
+    postgresql_data: {}
+
+# backup
+# docker exec -t myfirstblog_postgresql_1 pg_dumpall -c -U blogdb > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
+# restore
+# cat dump_16-01-2021_22_58_21.sql | docker exec -i myfirstblog_postgresql_1 psql -U blogdb

@@ -1,4 +1,4 @@
-FROM python:3.8.3-alpine
+FROM python:3.7.9-alpine3.12
 
 # work directory
 WORKDIR /usr/src/myFirstBlog
@@ -11,8 +11,13 @@ ENV PYTHONUNBUFFERED 1
 
 # install psycopg2 dependencies
 RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
-
+    && apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add postgresql-dev gcc python3-dev musl-dev \
+    && apk add postgresql \
+    && pip install psycopg2 \
+    && apk add jpeg-dev zlib-dev libjpeg \
+    && pip install Pillow \
+    && apk del build-deps
 # install dependencies
 RUN pip install --upgrade pip
 COPY requirements.txt .

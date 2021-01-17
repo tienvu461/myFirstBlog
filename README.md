@@ -46,7 +46,10 @@ docker-compose exec web python manage.py createsuperuser
 ```
 docker-compose exec db psql --username=blogdb --dbname=blogdb
 ```
-
+### Restore db
+```
+cat postgresql_dump.sql | docker exec -i myfirstblog_postgresql_1 psql -U blogdb
+```
 # Reference
 
 https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/

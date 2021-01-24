@@ -45,6 +45,7 @@ DATABASE=postgres
 ```
 ### Build and start docker 
 ```
+chmod +x myFirstBlog/entrypoint.sh
 docker-compose up -d --build
 ```
 ### Tail logs

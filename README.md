@@ -54,11 +54,16 @@ docker-compose logs -f
 ```
 ### Create superuser
 ```
-docker-compose exec web python manage.py createsuperuser
+docker-compose exec blog python manage.py createsuperuser
+```
+### Flush and migrate
+```
+$ docker-compose exec blog python manage.py flush --no-input
+$ docker-compose exec blog python manage.py migrate
 ```
 ### Check db
 ```
-docker-compose exec db psql --username=blogdb --dbname=blogdb
+docker-compose exec postgresql psql --username=blogdb --dbname=blogdb
 ```
 ### Restore db
 ```

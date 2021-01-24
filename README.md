@@ -30,9 +30,9 @@ Python 3.8.5
 ```
 
 6. Start services
-### Create env file at project root directory: ".env.dev" add allow host from server ip
+### Create env file at project root directory: ".env.prd" and ".env.prd.db" add allow host from server ip
 ```
-DEBUG=1
+DEBUG=0
 SECRET_KEY=...
 DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
 SQL_ENGINE=django.db.backends.postgresql
@@ -43,6 +43,12 @@ SQL_HOST=postgresql
 SQL_PORT=5432
 DATABASE=postgres
 ```
+```
+POSTGRES_USER=...
+POSTGRES_PASSWORD=...
+POSTGRES_DB=...
+```
+
 ### Build and start docker 
 ```
 chmod +x myFirstBlog/entrypoint.sh
@@ -58,8 +64,10 @@ docker-compose exec blog python manage.py createsuperuser
 ```
 ### Flush and migrate
 ```
-$ docker-compose exec blog python manage.py flush --no-input
-$ docker-compose exec blog python manage.py migrate
+docker-compose -f docker-compose.prd.yml up -d --build
+docker-compose -f docker-compose.prd.yml exec blog python ./myFirstBlog/manage.py flush --no-input
+docker-compose -f docker-compose.prd.yml exec blog python ./myFirstBlog/manage.py migrate --noinput
+docker-compose -f docker-compose.prd.yml exec blog python ./myFirstBlog/manage.py collectstatic --no-input --clear
 ```
 ### Check db
 ```
@@ -67,7 +75,7 @@ docker-compose exec postgresql psql --username=blogdb --dbname=blogdb
 ```
 ### Restore db
 ```
-cat postgresql_dump.sql | docker exec -i myfirstblog_postgresql_1 psql -U blogdb
+cat dump_17-01-2021_15_42_37.sql | docker exec -i myfirstblog_postgresql_1 psql -U blogdb
 ```
 # Reference
 

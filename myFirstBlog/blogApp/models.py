@@ -68,4 +68,3 @@ class BlogPost(DateCreateModMixin):
 class UploadedImage(models.Model):
     post = models.ForeignKey(BlogPost, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=datetime.now().strftime('%Y/%m/%d'))
-    # image_name = models.CharField(max_length=50)

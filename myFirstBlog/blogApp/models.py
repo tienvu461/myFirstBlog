@@ -1,4 +1,5 @@
 from django.db import models, transaction
+from django import forms
 from django.contrib.auth.models import User
 from django.utils import timezone
 from markdownx.models import MarkdownxField
@@ -38,13 +39,16 @@ class DateCreateModMixin(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     mod_date = models.DateTimeField(blank=True, null=True)
 
+# class TextForm(forms.Form):
+#     body = models.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 40}))
+
 class BlogPost(DateCreateModMixin):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=200, unique=True, null=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, default="1")
     body = MarkdownxField()
-    # background_image = models.ImageField(default='img/header.jpg', upload_to=datetime.now().strftime('backgrounds/%Y/%m/%d'))
+    # body = models.TextField()
 
     status = models.IntegerField(choices=STATUS, default=0)
     def formatted_markdown(self):
@@ -59,3 +63,9 @@ class BlogPost(DateCreateModMixin):
     def __str__(self):
         return self.title
 # Note: background_image is just for my header background, not MarkdownX
+
+# list of images uploaded in a blog post
+class UploadedImage(models.Model):
+    post = models.ForeignKey(BlogPost, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=datetime.now().strftime('%Y/%m/%d'))
+    # image_name = models.CharField(max_length=50)

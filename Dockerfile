@@ -23,8 +23,10 @@ RUN pip install --upgrade pip
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+
 # copy entrypoint.sh
 COPY ./myFirstBlog/entrypoint.sh .
+RUN chmod +x /usr/src/myFirstBlog/entrypoint.sh
 
 # source code
 COPY . .

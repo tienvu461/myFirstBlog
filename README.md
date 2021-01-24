@@ -30,7 +30,7 @@ Python 3.8.5
 ```
 
 6. Start services
-### Create env file at project root directory: ".env.dev"
+### Create env file at project root directory: ".env.dev" add allow host from server ip
 ```
 DEBUG=1
 SECRET_KEY=...

@@ -1,33 +1,40 @@
-# Hello World!
+# Đường lên mây 
 
 _~English below~_
 
+### "Đường lên mây" là gì?
 
-Hừm....
+Đường lên mây là series mà mình sẽ viết về (hay chính xác hơn là kể lại) con đường mà mình đã đi qua để trở thành một DevOps Engineer.
+Series này sẽ là một bản tự thuật ngắn, một reference để nếu như mai này có ai đó muốn tìm hiểu về mình thì có thể thông qua series này để hiểu về mình cũng như công việc của mình.
 
-Viết gì giờ nhỉ?
+### Đường lên mây gồm những gì?
 
-Chắc là nguyên nhân về sự tồn tại của cái blog này???
+Series này sẽ gồm 4 tập:
+1. Khởi đầu đam mê kỹ thuật
+2. Anh kỹ sư sống nhăn
+3. Chuyển hướng sang thợ code
+4. Một bước nữa là lên mây
 
-Chào mừng đến với blog của tienvv, sau quãng thời gian ấp ủ và thai nghén suốt vài tháng, cuối cùng thì mình cũng có thời gian để ngồi lại, mày mò và gõ lạch cạch để ra một cái blog nho nhỏ để chia sẻ và cũng như là để lưu lại chút kỉ niệm đời thường.
-
-Nội dung của chiếc blog này chắc là loanh quanh cuộc sống hằng ngày, tình cảm, gia đình, một chút công nghệ và công việc của mình nữa.
-
-Đón xem!!!
-
+### Đường lên mây - Phần I:
+## Khởi đầu đam mê kỹ thuật
 ---
 
-Hmmm....
 
-What to write about?
+### What is "Road to the cloud"?
 
-May be about the story how this blog is on???
+"Road to the cloud" is a series in which I will write about (to be more precisely:  narrate) on how did I become a DevOps Engineer.
+This series is going to be a short autobiography, a reference for anyone that need to know me in the future can take a look and get the idea of who I am and what I do.
 
-Welcome to tienvv's blog. Well... after a very long long time of thinking and procastinating, I have finally reach to a decision to sit down and take a real efford to build up and publish this blog site. With an intention to have a little corner to write and to share my memory.
+### What is included in "Road to the cloud"?
 
-This blog's content will be about every day life, love, family and technologies, especially on computer technology which is my profession.
+This series will include 4 part 
+1. The beginning of technology enthusiast
+2. Such a "raw" engineer
+3. Left turn to be a coder
+4. One more step to the cloud
 
-So stay tune and wait for more!!!
+### Road to the cloud - Part I:
+## The beginning of technology enthusiast
 
 ---
 <div align="right">

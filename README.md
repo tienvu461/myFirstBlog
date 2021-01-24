@@ -66,6 +66,7 @@ docker-compose exec blog python manage.py createsuperuser
 ```
 docker-compose -f docker-compose.prd.yml up -d --build
 docker-compose -f docker-compose.prd.yml exec blog python ./myFirstBlog/manage.py flush --no-input
+docker-compose -f docker-compose.prd.yml exec blog python ./myFirstBlog/manage.py makemigrations --noinput
 docker-compose -f docker-compose.prd.yml exec blog python ./myFirstBlog/manage.py migrate --noinput
 docker-compose -f docker-compose.prd.yml exec blog python ./myFirstBlog/manage.py collectstatic --no-input --clear
 ```

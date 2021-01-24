@@ -1,0 +1,83 @@
+###########
+# BUILDER #
+###########
+
+FROM python:3.7.9-alpine3.12 as builder
+
+# work directory
+WORKDIR /usr/src/myFirstBlog
+
+# set environment variables
+# no .pyc
+ENV PYTHONDONTWRITEBYTECODE 1
+# no stdout stderr
+ENV PYTHONUNBUFFERED 1
+
+# install psycopg2 dependencies
+RUN apk update \
+    && apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add postgresql-dev gcc python3-dev musl-dev \
+    && apk add postgresql \
+    && pip install psycopg2 \
+    && apk add jpeg-dev zlib-dev libjpeg \
+    && pip install Pillow \
+    && apk del build-deps
+# install dependencies
+RUN pip install --upgrade pip
+RUN pip install flake8
+COPY . .
+# RUN flake8 --ignore=E501,F401 .
+
+COPY requirements.txt .
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/myFirstBlog/wheels -r requirements.txt
+
+#########
+# FINAL #
+#########
+
+# pull official base image
+FROM python:3.7.9-alpine3.12 
+
+# create directory for the app user
+RUN mkdir -p /home/app
+
+# create the app user
+RUN addgroup -S app && adduser -S app -G app
+
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/myFirstBlog
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+# install dependencies
+RUN apk update \
+    && apk add libpq \
+    && apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add postgresql-dev gcc python3-dev musl-dev \
+    && apk add postgresql \
+    && pip install psycopg2 \
+    && apk add jpeg-dev zlib-dev libjpeg \
+    && pip install Pillow \
+    && apk del build-deps
+
+COPY --from=builder /usr/src/myFirstBlog/wheels /wheels
+COPY --from=builder /usr/src/myFirstBlog/requirements.txt .
+RUN pip install --no-cache /wheels/*
+
+# copy entrypoint-prd.sh
+COPY ./myFirstBlog/entrypoint.prd.sh $APP_HOME
+RUN chmod +x $APP_HOME/entrypoint.prd.sh
+
+# copy project
+COPY . $APP_HOME
+RUN mkdir -p $APP_HOME/myFirstBlog/static
+RUN mkdir -p $APP_HOME/myFirstBlog/media
+# chown all the files to the app user
+RUN chown -R app:app $APP_HOME
+
+# change to the app user
+USER app
+
+# run entrypoint.prd.sh
+ENTRYPOINT ["/home/app/myFirstBlog/entrypoint.prd.sh"]

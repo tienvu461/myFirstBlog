@@ -1,23 +1,37 @@
 version: "3.9"
 
 services:
-  web:
-    build: .
-    command: gunicorn myFristBlog.wsgi:application --bind 0.0.0.0:8000
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile.prd
+    command: gunicorn myFirstBlog.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - ./myFirstBlog/:/usr/src/myFirstBlog/
-    ports:
-      - "8000:8000"
+      - static_volume:/home/app/myFirstBlog/myFirstBlog/static
+      - media_volume:/home/app/myFirstBlog/myFirstBlog/media
+    expose:
+      - 8000
     env_file:
       - ./.env.prd
-  db:
+    depends_on: 
+      - postgresql
+  postgresql:
     image: postgres:12.0-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
+      - postgresql_data:/var/lib/postgresql/data/
     env_file:
       - ./.env.prd.db
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/home/app/myFirstBlog/myFirstBlog/static
+      - media_volume:/home/app/myFirstBlog/myFirstBlog/media
+    ports:
+      - 80:80
+    depends_on:
+      - blog
 
 volumes:
-  postgres_data:
+    postgresql_data: {}
+    static_volume: {}
+    media_volume: {}

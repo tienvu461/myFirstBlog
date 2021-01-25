@@ -26,6 +26,7 @@ services:
     volumes:
       - static_volume:/home/app/myFirstBlog/myFirstBlog/static
       - media_volume:/home/app/myFirstBlog/myFirstBlog/media
+      - log_volume:/var/log/nginx
     ports:
       - 80:80
     depends_on:
@@ -35,3 +36,4 @@ volumes:
     postgresql_data: {}
     static_volume: {}
     media_volume: {}
+    log_volume: {}

@@ -18,7 +18,10 @@ class GenericConfig(models.Model):
     welcome_phrase = models.CharField(default = "Welcome", max_length=200)
     short_description = models.CharField(default = "Description", max_length=200)
     brief_intro = models.CharField(default = "Hello", max_length=200)
-    social_url = models.CharField(default = "www.example.com", max_length=50)
+    linkedin_url = models.CharField(default = "www.example.com", max_length=50)
+    skype_url = models.CharField(default = "www.example.com", max_length=50)
+    github_url = models.CharField(default = "www.example.com", max_length=50)
+    gmail_url = models.CharField(default = "www.example.com", max_length=50)
     in_use = models.BooleanField(default = False)
 
     def save(self, *args, **kwargs):

@@ -8,6 +8,11 @@ urlpatterns = [
     # path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
     path('post/<int:pk>/', views.post, name='post_detail'),
     path('markdownx/', include('markdownx.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+#  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT )
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )

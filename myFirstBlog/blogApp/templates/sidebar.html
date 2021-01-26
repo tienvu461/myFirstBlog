@@ -1,5 +1,4 @@
-{% block sidebar %}
-{% load static %}
+{% load static %} {% block sidebar %}
 <style>
   .card {
     box-shadow: 0 16px 48px #e3e7eb;
@@ -12,57 +11,34 @@
     <h5 class="card-header">About Me</h5>
     <div class="card-body">
       <p class="card-text">{{generic_config.brief_intro}}</p>
-      <a href="{{generic_config.social_url}}" class="btn btn-danger"
-        >Know more!</a
-      >
-    </div>
-    
-    <div class="widget HTML" data-version="1" id="HTML1">
-      <div class="widget-content">
-        <!-- START  HERE-->
-        <div class="divicons">
-          <!-- LINKDEDIN -->
-          <a
-            href="REPLACE THIS TEXT WITH YOUR FACEBOOK URL"
-            target="_blank"
-            class="facebook socialIcons"
-          >
-            <img
-              src="myFirstBlog/static/images/facebook.png"
-          /></a>
-          <!-- EMAIL -->
-          <a
-            href="REPLACE THIS TEXT WITH YOUR TWITTER URL"
-            target="_blank"
-            class="twitter socialIcons"
-          >
-            <img
-              src="twitterimage"
-          /></a>
-          <!-- FACEBOOK -->
-          <a
-            href="mailto:REPLACE THIS TEXT WITH YOUR EMAIL ADDRESS"
-            target="_blank"
-            class="email socialIcons"
-          >
-            <img
-              src="emailimage"
-          /></a>
-          <!-- INSTAGRAM CODE BELOW -->
-          <a
-            href="REPLACE THIS TEXT WITH YOUR INSTAGRAM URL"
-            target="_blank"
-            class="inst socialIcons"
-          >
-            <img
-              src="instaimage"
-          /></a>
-          <!-- END -->
+      <div class="widget HTML" data-version="1" id="HTML1">
+        <div class="widget HTML">
+          <div class="row" style="text-align: center; margin-right: 30px; margin-left: 30px">
+            <!-- LINKDEDIN -->
+            <div class="col" >
+            <a href="{{generic_config.linkedin_url}}" class="linkedinIcon">
+              <img height="32" src="{% static 'images/linkedin.png' %}"/></a>
+            </div>
+            <!-- GITHUB -->
+            <div class="col">
+            <a href="{{generic_config.github_url}}" class="githubIcon" >
+              <img height="32" src="{% static 'images/github.png' %}"/></a>
+            </div>
+            <!-- GMAIL -->
+            <div class="col">
+            <a href="mailto:{{generic_config.gmail_url}}" class="gmailIcon">
+              <img height="32" src="{% static 'images/gmail.png' %}"/></a>
+            </div>
+            <!-- SKYPE -->
+            <div class="col">
+            <a href="skype:{{generic_config.skype_url}}?userinfo" class="skypeIcon">
+              <img height="32" src="{% static 'images/skype.png' %}"/></a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
 
 {% endblock sidebar %}
